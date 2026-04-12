@@ -1,0 +1,217 @@
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("/assets/fonts/JetBrainsMono[wght].woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("/assets/fonts/PlusJakartaSans[wght].woff2") format("woff2");
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+
+    /* Light professional security tool theme */
+    --background: 0.97 0.005 240;
+    --foreground: 0.15 0.02 250;
+    --card: 0.99 0.003 240;
+    --card-foreground: 0.15 0.02 250;
+    --popover: 1 0 0;
+    --popover-foreground: 0.15 0.02 250;
+    --primary: 0.48 0.2 240;
+    --primary-foreground: 0.99 0.003 240;
+    --secondary: 0.93 0.01 240;
+    --secondary-foreground: 0.25 0.03 250;
+    --muted: 0.93 0.008 240;
+    --muted-foreground: 0.45 0.03 250;
+    --accent: 0.92 0.01 240;
+    --accent-foreground: 0.25 0.03 250;
+    --destructive: 0.55 0.22 25;
+    --destructive-foreground: 0.99 0.003 240;
+    --border: 0.88 0.01 240;
+    --input: 0.93 0.008 240;
+    --ring: 0.48 0.2 240;
+
+    /* Severity - professional */
+    --severity-high: 0.55 0.22 25;
+    --severity-medium: 0.65 0.18 65;
+    --severity-low: 0.52 0.18 240;
+
+    /* Mode accents */
+    --dev-accent: 0.48 0.2 240;
+    --bug-accent: 0.55 0.22 25;
+    --success-accent: 0.48 0.2 145;
+
+    /* Code block bg */
+    --code-bg: 0.94 0.008 240;
+
+    /* Text */
+    --text-primary: 0.15 0.02 250;
+    --text-secondary: 0.45 0.03 250;
+
+    --chart-1: 0.48 0.2 240;
+    --chart-2: 0.55 0.22 25;
+    --chart-3: 0.48 0.2 145;
+    --chart-4: 0.65 0.18 65;
+    --chart-5: 0.55 0.16 290;
+
+    --sidebar: 0.97 0.005 240;
+    --sidebar-foreground: 0.15 0.02 250;
+    --sidebar-primary: 0.48 0.2 240;
+    --sidebar-primary-foreground: 0.99 0.003 240;
+    --sidebar-accent: 0.93 0.01 240;
+    --sidebar-accent-foreground: 0.25 0.03 250;
+    --sidebar-border: 0.88 0.01 240;
+    --sidebar-ring: 0.48 0.2 240;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Plus Jakarta Sans", "JetBrains Mono", sans-serif;
+    background-color: oklch(var(--background));
+    background-image: radial-gradient(
+        ellipse at 10% 20%,
+        oklch(0.48 0.2 240 / 0.04) 0%,
+        transparent 55%
+      ),
+      radial-gradient(
+        ellipse at 90% 80%,
+        oklch(0.55 0.22 25 / 0.03) 0%,
+        transparent 55%
+      );
+  }
+
+  code,
+  pre,
+  .font-mono,
+  textarea.code-input {
+    font-family: "JetBrains Mono", monospace;
+  }
+
+  h1,
+  h2,
+  h3,
+  .font-display {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-weight: 700;
+  }
+
+  /* Custom scrollbar - clean */
+  ::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+  ::-webkit-scrollbar-track {
+    background: oklch(var(--background));
+  }
+  ::-webkit-scrollbar-thumb {
+    background: oklch(0.8 0.01 240);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: oklch(0.7 0.02 240);
+  }
+}
+
+@layer utilities {
+  .text-dev-accent {
+    color: oklch(var(--dev-accent));
+  }
+  .text-bug-accent {
+    color: oklch(var(--bug-accent));
+  }
+  .text-success-accent {
+    color: oklch(var(--success-accent));
+  }
+  .bg-code {
+    background-color: oklch(var(--code-bg));
+  }
+  .severity-high {
+    color: oklch(var(--severity-high));
+  }
+  .severity-medium {
+    color: oklch(var(--severity-medium));
+  }
+  .severity-low {
+    color: oklch(var(--severity-low));
+  }
+
+  /* Scan line animation for textarea */
+  @keyframes scan-line {
+    0% {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(1000%);
+      opacity: 0;
+    }
+  }
+
+  /* Pulse for live indicator */
+  @keyframes live-pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.4;
+    }
+  }
+
+  /* Spinner */
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* Progress animations */
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+
+  .animate-scan-line {
+    animation: scan-line 1.8s ease-in-out infinite;
+  }
+  .animate-live-pulse {
+    animation: live-pulse 1.5s ease-in-out infinite;
+  }
+}
